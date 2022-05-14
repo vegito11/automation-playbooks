@@ -1,0 +1,15 @@
+---
+ubuntu:
+  key_url:
+    jenkins: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+  repos:
+    jenkins:
+      name: "Jenkins"
+      url: "deb https://pkg.jenkins.io/debian-stable binary/"
+      description: "Jenkins debian repo"
+
+packages:
+ java:
+    name: "openjdk-11-jdk"
+ jenkins:
+    name: "jenkins"

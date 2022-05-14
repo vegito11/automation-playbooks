@@ -1,0 +1,6 @@
+---
+- name: "Removing Jenkins"
+  apt:
+      name: jenkins
+      state: absent
+      

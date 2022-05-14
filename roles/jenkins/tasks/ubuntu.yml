@@ -1,0 +1,29 @@
+---
+# tasks file for jenkins
+- name: Add the jenkins key
+  apt_key:
+    state: present
+    url: "{{ ubuntu.key_url.jenkins }}"
+
+- name: "Adding {{ ubuntu.repos.jenkins.description }}"
+  apt_repository:
+      filename: "{{ubuntu.repos.jenkins.name }}"
+      repo: "{{ ubuntu.repos.jenkins.url }}"
+
+- name: Update apt cache
+  apt: 
+    update_cache: yes
+    state: latest
+
+- name: "Installing Java and Jenkins"
+  apt:
+      name: "{{ item.value.name }}"
+      state: present
+  loop:
+      "{{ lookup('dict', packages) }}"
+
+- name: "Starting jenkins"
+  service:
+      name: "jenkins"
+      state: started
+      enabled: yes

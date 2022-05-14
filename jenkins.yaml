@@ -1,0 +1,13 @@
+---
+- name: "jenkins installation playbook"
+  hosts: jenkins
+  vars:
+  tasks:
+    - name: "Checking connection"
+      ping:
+  roles:
+    - role: jenkins
+      is_install: False
+      is_remove: True
+      become: yes 
+      become_method: sudo

@@ -1,0 +1,2 @@
+- name: see environment variable
+  debug: msg="{{ ansible_env.HOME | default ("make sure you have enabled gather fact") }} of remote"

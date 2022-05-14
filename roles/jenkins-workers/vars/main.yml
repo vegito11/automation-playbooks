@@ -1,0 +1,27 @@
+---
+# vars file for jenkins
+ubuntu:
+  key_urls:
+    jenkins: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+    k8s: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+  repos:
+    k8s:
+      name: "kubernetes"
+      url: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+
+basic_packages:
+  - curl
+  - unzip
+  - apt-transport-https
+  - ca-certificates
+  - gnupg
+  - lsb-release
+  - software-properties-common
+  - openjdk-11-jdk
+  - python3
+  - python3-pip
+  - jq
+
+packages:
+  helm_version: v3.8.2
+  kubectl_version: v1.22.0

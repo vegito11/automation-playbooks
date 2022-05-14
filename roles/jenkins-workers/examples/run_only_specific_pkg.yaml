@@ -1,0 +1,14 @@
+---
+- name: "jenkins worker installation playbook"
+  hosts: example_host
+  gather_facts: False
+  
+  roles:
+    - role: roles/jenkins-workers  ## Update the location of role accordingly
+      docker_slave: False
+      basic_packages:  ## Overide the basic_packages variable of jenkins-workers roles
+        - curl
+        - unzip
+        - jq
+      become: yes 
+      become_method: sudo

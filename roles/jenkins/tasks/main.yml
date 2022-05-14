@@ -1,0 +1,12 @@
+---
+- name: using remove_jenkins file
+  include_tasks: remove_jenkins.yml
+  when: 
+    - is_remove is defined
+    - is_remove
+
+- name: using UBUNTU file
+  include_tasks: ubuntu.yml
+  when: 
+    - ansible_distribution == "Ubuntu"
+    - not is_install is defined or is_install

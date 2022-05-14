@@ -1,0 +1,12 @@
+---
+- name: "jenkins worker installation playbook"
+  hosts: jenkins
+  gather_facts: False
+  tasks:
+    - name: "Checking connection"
+      ping:
+  roles:
+    - role: ../roles/jenkins-workers
+      # docker_slave: True
+      become: yes 
+      become_method: sudo
