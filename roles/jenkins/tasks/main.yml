@@ -5,6 +5,13 @@
     - is_remove is defined
     - is_remove
 
+- name: Mount the volume
+  include_tasks: mnt_volume.yml
+  when:
+    -  IS_MOUNT is defined and IS_MOUNT
+  tags:
+    - debug
+
 - name: using UBUNTU file
   include_tasks: ubuntu.yml
   when: 

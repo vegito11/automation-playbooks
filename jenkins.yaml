@@ -7,7 +7,8 @@
       ping:
   roles:
     - role: jenkins
-      is_install: False
-      is_remove: True
+      is_remove: False
+      IS_MOUNT: True
+      is_install: True
       become: yes 
       become_method: sudo

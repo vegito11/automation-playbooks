@@ -1,12 +1,18 @@
 ---
 - name: "jenkins worker installation playbook"
-  hosts: jenkins
+  hosts: jenkins_workers
   gather_facts: False
+  pre_tasks:
+    - import_tasks: "../roles/jenkins/tasks/mnt_volume.yml"
+      tags:
+        - debug  
+  
   tasks:
     - name: "Checking connection"
       ping:
+
   roles:
     - role: ../roles/jenkins-workers
-      # docker_slave: True
-      become: yes 
+      docker_slave: True
+      become: yes
       become_method: sudo

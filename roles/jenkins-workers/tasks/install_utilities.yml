@@ -4,8 +4,6 @@
     name: "{{ item }}"
     state: present
   loop: "{{ basic_packages }}"
-  tags:
-    - debug
 
 - name: Install yq 
   shell: |
@@ -67,10 +65,13 @@
 
 - name: Enable Docker API
   shell: |
-    sudo sed -e -i "/ExecStart/s|-H.*| -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock |" /lib/systemd/system/docker.service    
+    sudo sed -ie "/ExecStart/s|-H.*| -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock |" /lib/systemd/system/docker.service    
     sudo systemctl daemon-reload
     sudo systemctl restart docker
+    curl http://localhost:4243/version
   args:
     executable: /bin/bash  
   when:
     - docker_slave is defined and docker_slave
+  tags:
+    - docker_api  

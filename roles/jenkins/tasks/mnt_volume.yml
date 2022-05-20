@@ -1,0 +1,38 @@
+- name: Mount the Volume 
+  shell: |
+    DISK_NAME={{ VOLM_NAME }}
+    IS_EMPTY=$( sudo file -s ${DISK_NAME} |  grep "${DISK_NAME}: data" | wc -w )
+    sudo cp /etc/fstab /etc/fstab.bkp
+
+    if [[ "$IS_EMPTY" == "0" ]]; then 
+      echo "${DISK_NAME} is not empty"
+    else
+      echo "Formatting Empty Volume : ${DISK_NAME}"
+      sudo mkfs -t ext4 "${DISK_NAME}"
+    fi  
+    
+    BLKID=$(sudo blkid ${DISK_NAME}*  | grep -o " UUID=\"[0-9a-z-]*" | awk -F= '{printf $2}' )
+    BLKID=${BLKID//\"}
+    IS_PRESENT=$( sudo cat /etc/fstab |  grep "{{ DATA_DIR }}" | wc -w )
+
+    ## If BLKID is not present in fstab and this blkid and blkid is not empty
+    if [ "${IS_PRESENT}" -eq 0 ] && [ ! -z "${BLKID}" ] ; then
+        sudo mkdir -p {{ DATA_DIR }}
+        echo "UUID=${BLKID} {{ DATA_DIR }} ext4 defaults,nofail  0  2" | sudo tee -a /etc/fstab
+        sudo mount -a
+    else
+        echo "{{ DATA_DIR }} -"$IS_PRESENT"- Already present in fstab OR Blkid is empty -${BLKID}-"
+        exit 0
+    fi
+    
+  args:
+    executable: /bin/bash
+  register: mnt_output
+  tags:
+  - mnt_vlm
+
+- name: See Mount Command Output
+  debug: var=mnt_output.stdout_lines
+  tags:
+  - mnt_vlm
+  

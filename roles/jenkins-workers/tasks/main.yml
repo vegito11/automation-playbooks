@@ -3,3 +3,7 @@
   include_tasks: install_utilities.yml
   tags:
     - always
+
+- include_tasks: utility_tasks.yml
+  tags:
+    - always

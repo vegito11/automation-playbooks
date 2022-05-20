@@ -1,0 +1,5 @@
+- name: add new directory
+  shell: |
+    sudo mkdir -p {{ DATA_DIR }}/data {{ DATA_DIR }}/docker_slave {{ DATA_DIR }}/slave_workspace
+  tags:
+  - mnt_vlm

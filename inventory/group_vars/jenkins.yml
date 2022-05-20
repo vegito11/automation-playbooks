@@ -1,0 +1,2 @@
+VOLM_NAME: "/dev/xvdf"
+DATA_DIR: "/var/lib/jenkins"

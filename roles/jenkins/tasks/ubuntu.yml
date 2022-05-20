@@ -1,5 +1,4 @@
 ---
-# tasks file for jenkins
 - name: Add the jenkins key
   apt_key:
     state: present
