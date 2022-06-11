@@ -1,0 +1,11 @@
+---
+- name: "jenkins worker installation playbook"
+  hosts: example_host
+  gather_facts: False
+  roles:
+    - role: roles/jenkins-workers  ## Update the location of role accordingly
+      docker_slave: False
+      become: yes 
+      become_method: sudo
+
+# ansible-playbook -i inventory/hosts playbooks/jenkins_workers.yaml  --tags debug

@@ -1,0 +1,21 @@
+---
+- name: Install Helm plugin with a specific version
+  kubernetes.core.helm_plugin:
+    plugin_version: "{{ item.value.version }}" 
+    plugin_path: "{{ item.value.path }}" 
+    state: present
+  loop: "{{ helm_plugins | dict2items }}"
+  become_user: "{{ ansible_user }}"
+
+- name: Install sops for secret package
+  shell: |
+    cd /tmp
+    curl -o sops -L https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux
+    mv sops /usr/local/bin/sops
+  vars:
+    SOPS_VERSION: "v3.7.3"
+
+- name: Install python3 packages
+  pip:
+    name: "{{ item }}"
+  loop: "{{ pip_packages }}"
