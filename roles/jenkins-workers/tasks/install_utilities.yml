@@ -63,7 +63,7 @@
   args:
     chdir: /tmp
 
-- name: Enable Docker API
+- name: Enable Docker API (curl http://localhost:4243/version)
   shell: |
     sudo sed -ie "/ExecStart/s|-H.*| -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock |" /lib/systemd/system/docker.service    
     sudo systemctl daemon-reload

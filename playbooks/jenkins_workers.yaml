@@ -4,8 +4,6 @@
   gather_facts: False
   pre_tasks:
     - import_tasks: "../roles/jenkins/tasks/mnt_volume.yml"
-      tags:
-        - debug  
   
   tasks:
     - name: "Checking connection"

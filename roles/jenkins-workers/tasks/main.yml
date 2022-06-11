@@ -7,3 +7,7 @@
 - include_tasks: utility_tasks.yml
   tags:
     - always
+
+- include_tasks: install_plugins.yml
+  tags:
+    - always

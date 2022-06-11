@@ -25,3 +25,17 @@ basic_packages:
 packages:
   helm_version: v3.8.2
   kubectl_version: v1.22.0
+
+helm_plugins:
+  s3:
+    version: 0.11.0
+    path: https://github.com/hypnoglow/helm-s3.git
+  secret:
+    version: 3.8.1
+    path: https://github.com/jkroepke/helm-secrets
+
+
+pip_packages:
+  - jinja2
+  - boto3
+  - python-jenkins
